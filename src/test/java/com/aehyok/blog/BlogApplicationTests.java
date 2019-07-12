@@ -1,4 +1,4 @@
-package com.lqm.aehyok;
+package com.aehyok.blog;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AehyokApplicationTests {
+public class BlogApplicationTests {
 
     @Test
     public void contextLoads() {
