@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.aehyok.blog.config;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
