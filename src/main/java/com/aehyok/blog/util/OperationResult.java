@@ -96,7 +96,7 @@ public class OperationResult {
 
     @Override
     public String toString() {
-        return "ReturnVO{" +
+        return "OperationResult{" +
                 "code='" + code + '\'' +
                 ", message='" + message + '\'' +
                 ", data=" + data +

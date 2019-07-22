@@ -21,7 +21,7 @@ public class TestController {
 
     @ApiOperation(value = "测试" , httpMethod ="GET", notes = "获取测试数据")
     @GetMapping(value = "/get")
-    public List<TestModel> get()
+    public Object get()
     {
         return testService.getAll();
     }

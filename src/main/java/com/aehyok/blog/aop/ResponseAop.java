@@ -1,6 +1,7 @@
 package com.aehyok.blog.aop;
 
 import com.aehyok.blog.util.OperationResult;
+import com.aehyok.blog.util.handler.GlobalExceptionHandler;
 import eu.bitwalker.useragentutils.UserAgent;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -24,7 +25,8 @@ public class ResponseAop {
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
     private final Logger log = LoggerFactory.getLogger(ResponseAop.class);
-
+    @Autowired
+    private GlobalExceptionHandler exceptionHandler;
 
     @Before("httpResponse()")
     public void doBefore(JoinPoint joinPoint){
@@ -53,7 +55,6 @@ public class ResponseAop {
     @Pointcut("execution(public * com.aehyok.blog.controller..*(..))")
     public void httpResponse() {
     }
-
     /**
      * 环切
      */
@@ -63,20 +64,18 @@ public class ResponseAop {
         try {
             startTime.set(System.currentTimeMillis());
             Object proceed = proceedingJoinPoint.proceed();
-            /**
             if (proceed instanceof OperationResult) {
                 operationResult = (OperationResult) proceed;
             } else {
                 operationResult.setData(proceed);
             }
-             **/
-            return proceed;
         }  catch (Throwable throwable) {
             // 这里直接调用刚刚我们在handler中编写的方法
-            operationResult =null;  //exceptionHandler.handlerException(throwable);
+           operationResult=exceptionHandler.handlerException(throwable);
         }
         return operationResult;
     }
+
 
     @AfterReturning(returning = "ret" , pointcut = "httpResponse()")
     public void doAfterReturning(Object ret){
