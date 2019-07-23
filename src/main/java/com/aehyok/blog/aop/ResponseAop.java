@@ -28,6 +28,7 @@ public class ResponseAop {
     @Autowired
     private GlobalExceptionHandler exceptionHandler;
 
+    //action执行前的日志
     @Before("httpResponse()")
     public void doBefore(JoinPoint joinPoint){
         startTime.set(System.currentTimeMillis());
@@ -71,12 +72,13 @@ public class ResponseAop {
             }
         }  catch (Throwable throwable) {
             // 这里直接调用刚刚我们在handler中编写的方法
-           operationResult=exceptionHandler.handlerException(throwable);
+           //operationResult=exceptionHandler.handlerException(throwable);
         }
         return operationResult;
     }
 
 
+    //action执行后的日志
     @AfterReturning(returning = "ret" , pointcut = "httpResponse()")
     public void doAfterReturning(Object ret){
         //处理完请求后，返回内容

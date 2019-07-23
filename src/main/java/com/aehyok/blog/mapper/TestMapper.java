@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface TestMapper {
-    @Select("select * from tests")
+    //@Select("select * from tests")
     List<TestModel> getAll();
 }
