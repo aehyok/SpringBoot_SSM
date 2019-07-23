@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aehyok.blog.mapper.TestMapper">
     <select id="getAll" resultType="TestModel">
-		select * from tests
+		select * from tests where 1=1
+	</select>
+
+	<select id="get" resultType="TestModel">
+		select * from tests where 1=1
+		<if test="id >0">
+		and id=#{id}
+		</if>
 	</select>
 </mapper>

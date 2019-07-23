@@ -72,7 +72,7 @@ public class ResponseAop {
             }
         }  catch (Throwable throwable) {
             // 这里直接调用刚刚我们在handler中编写的方法
-           //operationResult=exceptionHandler.handlerException(throwable);
+           operationResult=exceptionHandler.handlerException(throwable);
         }
         return operationResult;
     }

@@ -5,9 +5,7 @@ import com.aehyok.blog.service.TestService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +19,15 @@ public class TestController {
 
     @ApiOperation(value = "测试" , httpMethod ="GET", notes = "获取测试数据")
     @GetMapping(value = "/get")
-    public Object get()
+    public Object getAll()
     {
         return testService.getAll();
     }
+    @ApiOperation(value = "测试" , httpMethod ="GET", notes = "获取指定条件的测试数据")
+    @RequestMapping(value="/get/{id}",method= RequestMethod.GET)
+    public Object get(@PathVariable int id)
+    {
+        return testService.get(id);
+    }
+
 }

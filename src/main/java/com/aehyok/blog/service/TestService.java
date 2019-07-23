@@ -16,4 +16,8 @@ public class TestService {
     public List<TestModel> getAll(){
         return testMapper.getAll();
     }
+
+    public List<TestModel> get(int id){
+        return testMapper.get(id);
+    }
 }
