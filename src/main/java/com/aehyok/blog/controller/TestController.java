@@ -24,10 +24,10 @@ public class TestController {
         return testService.getAll();
     }
     @ApiOperation(value = "测试" , httpMethod ="GET", notes = "获取指定条件的测试数据")
-    @RequestMapping(value="/get/{id}",method= RequestMethod.GET)
-    public Object get(@PathVariable int id)
+    @RequestMapping(value="/get/{id}/{name}",method= RequestMethod.GET)
+    public Object get(@PathVariable int id,@PathVariable String name)
     {
-        return testService.get(id);
+        return testService.get(id,name);
     }
 
 }

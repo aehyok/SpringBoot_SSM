@@ -13,5 +13,5 @@ public interface TestMapper {
     //@Select("select * from tests")
     List<TestModel> getAll();
 
-    List<TestModel> get(@Param("id") int id);
+    List<TestModel> get(@Param("id") int id,@Param("name") String name);
 }
