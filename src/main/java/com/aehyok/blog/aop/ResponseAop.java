@@ -20,10 +20,11 @@ import java.util.Arrays;
 
 @Aspect
 @Component
+
 public class ResponseAop {
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
-    //private final Logger log = LoggerFactory.getLogger(ResponseAop.class);
+    private final Logger logger = LoggerFactory.getLogger(ResponseAop.class);
     @Autowired
     private GlobalExceptionHandler exceptionHandler;
 
@@ -39,16 +40,16 @@ public class ResponseAop {
         System.out.println(request.getServerPort());
         //记录请求的内容
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
-        /**
-        log.info("接口路径：{}" , request.getRequestURL().toString());
-        log.info("浏览器：{}", userAgent.getBrowser().toString());
-        log.info("浏览器版本：{}",userAgent.getBrowserVersion());
-        log.info("操作系统: {}", userAgent.getOperatingSystem().toString());
-        log.info("IP : {}" , request.getRemoteAddr());
-        log.info("请求类型：{}", request.getMethod());
-        log.info("类方法 : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        log.info("请求参数 : {} " + Arrays.toString(joinPoint.getArgs()));
-         **/
+
+        logger.info("接口路径：{}" , request.getRequestURL().toString());
+        logger.info("浏览器：{}", userAgent.getBrowser().toString());
+        logger.info("浏览器版本：{}",userAgent.getBrowserVersion());
+        logger.info("操作系统: {}", userAgent.getOperatingSystem().toString());
+        logger.info("IP : {}" , request.getRemoteAddr());
+        logger.info("请求类型：{}", request.getMethod());
+        logger.info("类方法 : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        logger.info("请求参数 : {} " + Arrays.toString(joinPoint.getArgs()));
+
     }
 
     /**
@@ -83,9 +84,7 @@ public class ResponseAop {
     @AfterReturning(returning = "ret" , pointcut = "httpResponse()")
     public void doAfterReturning(Object ret){
         //处理完请求后，返回内容
-        /**
-        log.info("方法返回值：{}" , ret);
-        log.info("方法执行时间：{}毫秒", (System.currentTimeMillis() - startTime.get()));
-         **/
+         logger.info("方法返回值：{}" , ret);
+         logger.info("方法执行时间：{}毫秒", (System.currentTimeMillis() - startTime.get()));
     }
 }
